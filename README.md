@@ -79,7 +79,8 @@ After creating database DatabaseDDL.sql and importing data from test data files
     `wl.books.track.bookstrack.BookstrackApplication` 
 
 2. run Postman and invoke request
-   #####http://localhost:8082/bookstrack/build/index
+   #### http://localhost:8082/bookstrack/build/index
+   
     This create Lucene index, it takes some time, invoke it only ones after importing data.
 
 3. Run requests 
