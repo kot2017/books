@@ -29,12 +29,12 @@ at 10000000 (10 milion) records page of 20 records is returned in aprx. 10 sek.
 ## 3.Edit/remove the book entered to the system
 
 take book for edition: 
-#####GET http://localhost:8082/bookstrack/book/{id}
+#### GET http://localhost:8082/bookstrack/book/{id}
 at 10000000 (10 milion) records the book is returned in aprx. 2 sek
 save edited book:  
-######POST http://localhost:8082/bookstrack/book/save
+#### POST http://localhost:8082/bookstrack/book/save
 remove book
-######POST http://localhost:8082/bookstrack/book/delete/{id}
+### POST http://localhost:8082/bookstrack/book/delete/{id}
 
 ## 4. The API should respond in a timely fashion even when 10 million books are entered into the system. 
 #### http://localhost:8082/bookstrack/search/?q={}&limit={}
@@ -55,16 +55,17 @@ After setting the limit of number returned records the response time is aprx. 2 
 ![](book_comment.jpg)
 
 ---------------------
-##How to use:
+## How to use:
 database - MySQL
+
  DDL script DatabaseDDL.sql
  
 application.properties
  
 spring.datasource.url=jdbc:mysql://localhost:3306/bookstrack
-####Test data
+#### Test data
  books1m.csv books9m.csv comment1m.csv comment9m.csv
- ####Lucene index
+ #### Lucene index
  
  create direktory for Lucene index and put path to this directory to  application.properties
  
