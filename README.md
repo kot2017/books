@@ -1,7 +1,7 @@
 # books
 Java backend API that keeps track of books read by a user. The application allows to:
 
-##1.	Add a new book (
+## 1.	Add a new book (
 title,
  author, 
 ISBN number, 
@@ -14,7 +14,7 @@ nice to have:  validate ISBN number)
 #####good request:
  ``{"title":"Hibernate Search Skuteczne wyszukiwanie","author":"Steve Perkins","isbn":"978-83-246-8600-1","pages":127,"rating":4,"commentsList":null}
 
-##2. List books entered into the system
+## 2. List books entered into the system
 
 parameters: 
 
@@ -25,7 +25,9 @@ limit - number of records in one page
 
 ######GET http://localhost:8082/bookstrack/books/all?page=0&limit=5``
 at 10000000 (10 milion) records page of 20 records is returned in aprx. 10 sek.
-##3. Edit/remove the book entered to the system
+
+## 3.Edit/remove the book entered to the system
+
 take book for edition: 
 #####GET http://localhost:8082/bookstrack/book/{id}
 at 10000000 (10 milion) records the book is returned in aprx. 2 sek
@@ -34,7 +36,7 @@ save edited book:
 remove book
 ######POST http://localhost:8082/bookstrack/book/delete/{id}
 
-##4. The API should respond in a timely fashion even when 10 million books are entered into the system. 
+## 4. The API should respond in a timely fashion even when 10 million books are entered into the system. 
 #### http://localhost:8082/bookstrack/search/?q={}&limit={}
 the book is searched by parameter q, which may be author, title or isbn.
 The result is sorted by title, author and isbn. 
@@ -44,7 +46,7 @@ At 10000000 (10 milion) records the time of searching without limits depends on 
 After setting the limit of number returned records the response time is aprx. 2 sec (max 10 sec)
 
 
-##5. Add API to add a comment to a book.
+## 5. Add API to add a comment to a book.
  Every book can have multiple comments. The List books API from point 2. should include latests 5 comments for every book.
 #### http://localhost:8082/bookstrack/comment/?bookId={id}}
 {"body":" to jest ok...","author":"WL","date":null}
@@ -68,7 +70,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/bookstrack
  
     spring.jpa.properties.hibernate.search.default.indexBase= {path}
 
-####Preparing data
+## Preparing data
 
 After creating database DatabaseDDL.sql and importing data from test data files
 
