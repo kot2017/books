@@ -1,17 +1,17 @@
 # books
 Java backend API that keeps track of books read by a user. The application allows to:
 
-## 1.	Add a new book (
+## 1.	Add a new book  
 title,
  author, 
 ISBN number, 
 number of pages, 
 1-5 rating of how much the reader enjoyed it; 
-nice to have:  validate ISBN number)
-#####POST  http://localhost:8082/bookstrack/book/save  
-#####bad request:
+nice to have:  validate ISBN number 
+##### POST  http://localhost:8082/bookstrack/book/save  
+###### bad request:
 ``{"title":"Żółte Auto","author":"Piotr","isbn":"5356346356","pages":2,"rating":4,"commentsList":null}
-#####good request:
+###### good request:
  ``{"title":"Hibernate Search Skuteczne wyszukiwanie","author":"Steve Perkins","isbn":"978-83-246-8600-1","pages":127,"rating":4,"commentsList":null}
 
 ## 2. List books entered into the system
