@@ -49,8 +49,14 @@ After setting the limit of number returned records the response time is aprx. 2 
 ## 5. Add API to add a comment to a book.
  Every book can have multiple comments. The List books API from point 2. should include latests 5 comments for every book.
 #### http://localhost:8082/bookstrack/comment/?bookId={id}}
+request body: json
 {"body":" to jest ok...","author":"WL","date":null}
 
+parameter: bookId - id of book
+
+To view the existing comments call the service:
+
+#### http://localhost:8082/bookstrack/book/{id}
 
 ![](book_comment.jpg)
 
