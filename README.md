@@ -15,6 +15,7 @@ nice to have:  validate ISBN number)
  ``{"title":"Hibernate Search Skuteczne wyszukiwanie","author":"Steve Perkins","isbn":"978-83-246-8600-1","pages":127,"rating":4,"commentsList":null}
 
 ##2. List books entered into the system
+
 parameters: 
 
 page - number of following page
