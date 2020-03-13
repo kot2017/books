@@ -55,8 +55,12 @@ public class BookController {
         if (valid) {
             Integer pageInt = Integer.parseInt(page);
             Integer limitInt = Integer.parseInt(limit);
-            List<BookApi> bookApiList = bookService.getAllBooks(pageInt, limitInt, null);
-            return new ResponseEntity<>(bookApiList, HttpStatus.OK);
+            try {
+                List<BookApi> bookApiList = bookService.getAllBooks(pageInt, limitInt, null);
+                return new ResponseEntity<>(bookApiList, HttpStatus.OK);
+            }catch(Exception e){
+                return new ResponseEntity<>("wystąpił bład: " + e.getMessage(), HttpStatus.NOT_FOUND);
+            }
         }
         return new ResponseEntity<>("zła parametry", HttpStatus.BAD_REQUEST);
     }
@@ -86,6 +90,13 @@ public class BookController {
     }
 
 
+    @RequestMapping(value = "book/delete/{id}")
+    public  ResponseEntity<?> deleteBook(@PathVariable Integer id){
+        booksRepository.deleteById(id);
+        return new ResponseEntity<>(" ", HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "comment", method = RequestMethod.POST)
     public ResponseEntity<?> addComment(@RequestBody CommentApi comment, @RequestParam String bookId) {
 
@@ -101,10 +112,10 @@ public class BookController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ResponseEntity<?> search(@RequestParam String q) {
+    public ResponseEntity<?> search(@RequestParam String q, @RequestParam int limit) {
         List searchResult = null;
         try {
-            searchResult = bookSearch.search(q);
+            searchResult = bookSearch.search(q, limit);
             return new ResponseEntity<>(searchResult, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,9 +1,9 @@
 package wl.books.track.bookstrack.entity;
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Index;
 import java.util.Objects;
 
 import static org.hibernate.search.annotations.Store.NO;
@@ -30,7 +30,11 @@ public class Books {
     }
 
     @Basic
-    @Field
+    @Fields({
+            @Field,
+            @Field(name = "sortTitle", analyze = Analyze.YES, store = Store.NO)
+    })
+    @SortableField(forField = "sortTitle")
     @Column(name = "title", nullable = true, length = 50)
     public String getTitle() {
         return title;
@@ -41,7 +45,11 @@ public class Books {
     }
 
     @Basic
-    @Field
+    @Fields({
+            @Field,
+            @Field(name = "sortAuthor", analyze = Analyze.YES, store = Store.YES)
+    })
+    @SortableField(forField = "sortAuthor")
     @Column(name = "author", nullable = true, length = 50)
     public String getAuthor() {
         return author;
@@ -52,7 +60,11 @@ public class Books {
     }
 
     @Basic
-    @Field
+    @Fields({
+            @Field,
+            @Field(name = "sortIsbn", analyze = Analyze.YES, store = Store.YES)
+    })
+    @SortableField(forField = "sortIsbn")
     @Column(name = "isbn", nullable = true, length = 30)
     public String getIsbn() {
         return isbn;

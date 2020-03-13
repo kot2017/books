@@ -4,12 +4,14 @@ import java.util.List;
 
 public class BookApi {
 
+    private int id;
     private String title;
     private String author;
     private String isbn;
     private int pages;
     private int rating;
     private List<CommentApi> commentsList;
+    private int totalPages;
 
     public String getTitle() {
         return title;
@@ -57,5 +59,21 @@ public class BookApi {
 
     public void setCommentsList(List<CommentApi> commentsList) {
         this.commentsList = commentsList;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 }

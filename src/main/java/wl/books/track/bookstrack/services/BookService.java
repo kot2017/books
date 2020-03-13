@@ -38,21 +38,18 @@ public class BookService {
 
 
     public List<BookApi> getAllBooks(Integer page, Integer limit, String sortBy) {
-         Pageable paging = PageRequest.of(page, limit, Sort.unsorted());
+        Pageable paging = PageRequest.of(page, limit, Sort.unsorted());
 
-         Page<Books> pageBooks = booksRepository.findAll(paging);
-
-         System.out.println("======> pageBook: "+ pageBooks.getTotalPages());
-
-  //      List<Books> list = (List<Books>) booksRepository.findAll();
+        Page<Books> pageBooks = booksRepository.findAll(paging);
+        int total = pageBooks.getTotalPages();
+        System.out.println("======> pageBook: " + total);
         List<BookApi> bookApiList = new ArrayList<>();
-         System.out.println("======> bookApiList: "+ bookApiList.toString());
-        List<Books> list = pageBooks.getContent();
 
+        List<Books> list = pageBooks.getContent();
 
         for (Books books : list
         ) {
-            BookApi book = convertBooks(books);
+            BookApi book = convertBooks(books, total);
             bookApiList.add(book);
         }
         return bookApiList;
@@ -60,20 +57,32 @@ public class BookService {
     }
 
 
-
-
-    private BookApi convertBooks(Books books) {
+    private BookApi convertBooks(Books books, Integer total){
         BookApi book = new BookApi();
-        book.setAuthor(books.getAuthor());
-        book.setTitle(books.getTitle());
-        book.setIsbn(books.getIsbn());
-        book.setPages(books.getPages());
-        book.setRating(books.getRating());
+        book.setId(books.getId());
+        if (books.getAuthor() != null) {
+            book.setAuthor(books.getAuthor());
+        }
+        if (books.getTitle() != null) {
+            book.setTitle(books.getTitle());
+        }
+        if (books.getPages() != null) {
+            book.setPages(books.getPages());
+        }
+        if (books.getIsbn() != null) {
+            book.setIsbn(books.getIsbn());
+        }
+        if (books.getRating() != null) {
+            book.setRating(books.getRating());
+        }
+        if(total != null){
+            book.setTotalPages(total);
+        }
         return book;
     }
 
     public BookApi convertBookAndComment(Books books) {
-        BookApi book = convertBooks(books);
+        BookApi book = convertBooks(books, null);
 
         List<Comment> commentList = customCommentRepository.getCommentsByBookId(books.getId());
         if (commentList != null && !commentList.isEmpty()) {
@@ -93,26 +102,25 @@ public class BookService {
     }
 
 
-
-    public void saveComment (CommentApi commentApi, Integer id){
+    public void saveComment(CommentApi commentApi, Integer id) {
         Comment comment = new Comment();
         comment.setAuthor(commentApi.getAuthor());
         comment.setBody(commentApi.getBody());
-       // Optional<Books> books = booksRepository.findById(id);
-      //   comment.setBooksByBookId( books.get());
-      //  comment.setBooksByBookId(id);
+        // Optional<Books> books = booksRepository.findById(id);
+        //   comment.setBooksByBookId( books.get());
+        //  comment.setBooksByBookId(id);
         comment.setBookId(id);
         comment.setDateCreation(new Timestamp(System.currentTimeMillis()));
         comment.setUpdate(new Timestamp(System.currentTimeMillis()));
 
-        System.out.println("=======>>  comment: "+  comment.toString());
+        System.out.println("=======>>  comment: " + comment.toString());
 
-         commentRepository.save(comment);
+        commentRepository.save(comment);
 
     }
 
 
-    public void saveBook(BookApi bookApi){
+    public void saveBook(BookApi bookApi) {
         Books books = new Books();
         books.setAuthor(bookApi.getAuthor());
         books.setTitle(bookApi.getTitle());
